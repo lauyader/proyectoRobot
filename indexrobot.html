@@ -1,0 +1,308 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content = "height = device-height, width = 420, user-scalable = no" />
+    <title>LauyaderBots PHP+Python+Html5</title>
+
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+       <script type="text/javascript" src="/webiopi.js"></script>
+       <script type="text/javascript" src="graficas/js/jquery.min.js"></script>
+
+    <style>
+        table {
+          margin: 15px;
+          padding: 15px;
+        }
+
+    </style>
+
+    <script type="text/javascript">
+    ////////////////////////////
+    // Funciones de activar en Ultrasonido
+    ////////////////////////////
+    function Ultrasonido_Inicio(){
+      webiopi().callMacro("Ultrasonido_Inicio");
+    }
+    function Ultrasonido_Parar(){
+      webiopi().callMacro("Ultrasonido_Inicio");
+    }
+    ////////////////////////////
+    // Funciones de Acelerar  Retroceder
+    ////////////////////////////
+
+    function Forward() {
+        webiopi().callMacro("Forward");
+     }
+
+    function Parar() {
+        webiopi().callMacro("Stop");
+     }
+
+
+
+    function Retroceder() {
+        webiopi().callMacro("Retroceder");
+
+     }
+     ////////////////////////////
+     // Funciones de Direccion del Vehiculo
+     ////////////////////////////
+     function Izquierda() {
+         webiopi().callMacro("Izquierda");
+
+      }
+     function Derecha() {
+         webiopi().callMacro("Derecha");
+
+      }
+
+      ////////////////////////////
+      // Funciones de Luces
+      ////////////////////////////
+     function Luces() {
+         webiopi().callMacro("Luces");
+      }
+
+      function ApagarLuces() {
+          webiopi().callMacro("ApagarLuces");
+       }
+    // funciones para datos de la gráfica xy
+
+    $(function () {
+                    $('#monitor').highcharts({
+                        title: {
+                            text: 'Sensor de Temperatura',
+                            x: -20 //center
+                        },
+                        subtitle: {
+                            text: 'Origen: Raspberry- botsLauyader',
+                            x: -20
+                        },
+                        xAxis: {
+                            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                        },
+                        yAxis: {
+                            title: {
+                                text: 'Temperature (°C)'
+                            },
+                            plotLines: [{
+                                value: 0,
+                                width: 1,
+                                color: '#808080'
+                            }]
+                        },
+                        tooltip: {
+                            valueSuffix: '°C'
+                        },
+                        legend: {
+                            layout: 'vertical',
+                            align: 'right',
+                            verticalAlign: 'middle',
+                            borderWidth: 0
+                        },
+                        series: [
+                        {
+                            name: 'Humedad',
+                            data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+                        },
+
+
+                        {
+                            name: 'Sensor',
+                            data: [4.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+                        },
+
+
+                        ]
+                    });
+                });
+
+
+
+
+
+     // Fin de la declaración de la funciones
+    </script>
+
+    <!-- Hoja de estilo para la página -->
+    <style type="text/css">
+        button2 {
+            margin: 5px 5px 5px 5px;
+            width: 50px;
+            height: 50px;
+            font-size: 24pt;
+            font-weight: bold;
+            color: white;
+        }
+
+        table {
+          margin: 15px;
+          padding: 15px;
+        }
+
+        td {
+          margin: 15px;
+          padding: 15px;
+          text-align: center
+        }
+        tr {
+          margin: 15px;
+          padding: 15px;
+           text-align: center
+        }
+
+        #titulo{
+          background: white;
+        }
+
+        #tope{
+
+          background: white;
+
+        }
+
+        #monitor{
+          background: #8eceea;
+          padding: 10px;
+
+
+        }
+
+        #datos{
+          background: #1fa4ec;
+          padding: 5px;
+
+
+          border-bottom-right-radius: 15px;
+          border-bottom-left-radius: 15px;
+        }
+
+    </style>
+
+    <!-- Fin de la hoja de estilo -->
+
+</head>
+<body background="raspberrypu.jpg">
+<script src="graficas/js/highcharts.js"></script>
+<script src="graficas/js/modules/exporting.js"></script>
+
+<div class="container">
+  <div   align="center" id="tope" class="row well  ">
+  <img align="center" width="900" src="/robot/tope.png">
+
+     <h6>Realizado por: Luis Americo Auyadermont Muñoz</h6>
+  </div> <!-- Fin del encabezado-->
+
+
+<div class="row" align="center">
+
+     <div  class="col-xs-12 col-sm-12 col-md-12 col-lg-12 well ">
+
+
+      <div id="titulo" align="center" class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+
+
+         <h4 >Luces del Vehículo</h4>
+
+         <div class="row"> <!-- LUces -->
+
+                <div class="btn-group-vertical">
+                 <button class="btn btn-danger btn-lg" type="button" onmousedown="Luces()" onmouseup="stop"> Encender Luces</button>
+                <button class="btn btn-warning btn-lg" type="button" onmousedown="ApagarLuces()" onmouseup="stop">Apagar Luces</button>
+                </div>
+
+          </div><!-- fin de la  primera columna de luces del vehiculo -->
+
+          <div class="btn-group-vertica">
+          <h5>Datos de los Sensores</h5>
+
+
+          </div>
+          <div id="datos" class="btn-group-vertical">
+          <h1>0:00 cm</h1>
+
+
+          </div>
+
+      </div>
+
+        <div align="center" class="col-xs-3 col-sm-4 col-md-4 col-lg-4">
+          <div  id="titulo" class="row">
+           <h4>Monitor</h4>
+
+          </div>
+          <div  id="monitor" style="min-width: 310px;  height: 300px; margin: 0 auto" class="row">
+          <img width="200" src="esfera.png">
+          </div>
+       </div> <!-- fin de la segunda columna de control del vehiculo -->
+
+               <div align="center" class="col-xs-3 col-sm-4 col-md-4 col-lg-4">
+                    <div  id="titulo" class="row">
+                     <h4>Sensores</h4>
+
+                    </div>
+                    <div id="titulo" class="row">
+                          <div class="btn-group-vertical"><!-- Inicio de botones  de sensores del vehiculo -->
+                              <button class="btn btn-info btn-lg" type="button" onmousedown="Ultrasonido_Inicio()" onmouseup="stop">  Detectar Obstaculos</button>
+                              <button class="btn btn-danger btn-lg" type="button" onmousedown="Ultrasonido_Parar()" onmouseup="stop">Apagar Detec-Obsta</button>
+                              <button class="btn btn-success btn-lg" type="button" onmousedown="luces_apagar()" onmouseup="stop">Rostros</button>
+                              <button class="btn btn-primary btn-lg" type="button" onmousedown="luces_apagar()" onmouseup="stop">Colores</button>
+                          </div><!-- fin botones  de sensores del vehiculo -->
+
+                    </div>
+                </div><!-- fin de la tercera columna de sensores del vehiculo -->
+
+    </div><!-- fin de Control  del vehiculo -->
+</div>
+
+       </div>
+</div>
+
+<div class="row well">
+  <p align="center" >Area de control de dirección de Vehículo</p>
+
+  <table align="center" class="table table-hover">
+    <thead>
+      <tr>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody align="center">
+      <tr>
+        <td colspan="3"> <button class="btn btn-danger btn-lg" type="button" onmousedown="Forward()" onmouseup="stop"> <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span></button></td>
+      </tr>
+      <tr>
+        <td> <button class="btn btn-danger btn-lg" type="button" onmousedown="Izquierda()" onmouseup="stop"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></button></td>
+        <td> <button class="btn btn-danger btn-lg" type="button" onmousedown="Parar()" onmouseup="stop"><span class="glyphicon glyphicon-off" aria-hidden="true"></span></button></td>
+        <td> <button class="btn btn-danger btn-lg" type="button" onmousedown="Derecha()" onmouseup="stop"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button></td>
+      </tr>
+      <tr>
+        <td colspan="3"> <button class="btn btn-danger btn-lg" type="button" onmousedown="Retroceder()" onmouseup="stop"><span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+<div class="panel panel-default">
+  <div align="center" class="panel-body">
+   Fuentes y adaptaciones
+  </div>
+  <div align="center" class="panel-footer">
+  <p>Referencias: <a href="http://trouch.com/2013/03/04/webiopi-in-the-magpi-cambot-tutorial/">Cambot webiopi-in-the-magpi-cambot-tutorial</a></p>
+    <p>Adaptado para html5+python+Bootstrap 3</p>
+  </div>
+</div>
+
+</div> <!--Fin del container -->
+
+
+
+
+</body>
+</html>

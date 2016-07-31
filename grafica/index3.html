@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Highcharts Data loaded from a csv file using highcharts data module</title>
+		<style>
+		body{
+			margin-top: 30px;
+			margin-left:40px;
+		}
+		</style>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script src="js/highcharts.js"></script>
+				<script src="js/modules/data.js"></script>
+
+
+
+</head>
+<body>
+	<div style="width: 800px; margin: 2em auto; padding: 1em; border: 1px solid red; border-radius: 0.5em">
+ Gráfica en el cálculo de distancia, su uso puede hacer hacer con diferentes tipos de sensores.
+	<a href="http://api.highcharts.com/#data">Data module</a>.
+	</div>
+    <div id="container" style="height: 400px"></div>
+        <script type="text/javascript">
+			$(function () {
+				$.get('data.csv', function(data) {
+				 $('#container').highcharts({
+							chart: {
+								type: "line"
+							},
+							title: {
+								text: "Sensor de Ultrasonido"
+							},
+							xAxis: {
+								categories: []
+							},
+							yAxis: {
+								title: {
+									text: "Distancia"
+								}
+							},
+							data: {
+								csv: data
+								//csv: document.getElementById('csv').innerHTML
+							},
+							plotOptions: {
+								series: {
+									marker: {
+										enabled: false
+									}
+								}
+							}
+					});
+				});
+			});
+    </script>
+</body>
+</html>
